@@ -65,7 +65,7 @@ jobs:
     env:
       VAR2: job4myvar2 in an job local variable
       VAR3: job4var3 local variables
-    steps:
+     steps:
 
       - run: |
           echo "VAR1 at the end" 
