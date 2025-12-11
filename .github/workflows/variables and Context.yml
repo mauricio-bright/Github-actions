@@ -17,9 +17,9 @@ on:
         required: true
 
 env:
-  VAR1: myworkflowvar1
-  VAR2: myworkflowvar2
-  VAR3: myworkflowvar3
+  VAR1: Global1
+  VAR2: Global2
+  VAR3: Global3
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -46,12 +46,12 @@ jobs:
       - name: Step 1
         id: step1
         # run: echo "::set-output name=step1value::hello"
-        run: echo "step1value=hello" >> $GITHUB_OUTPUT
+        run: echo "step1value=Step1value" >> $GITHUB_OUTPUT
 
       - name: Step 2
         id: step2
         # run: echo "::set-output name=step2value::world"
-        run: echo "step2value=world" >> $GITHUB_OUTPUT
+        run: echo "step2value=step2value"  >> $GITHUB_OUTPUT
   
   job3:
     runs-on: ubuntu-latest
@@ -63,18 +63,23 @@ jobs:
   job4:
     runs-on: ubuntu-latest
     env:
-      VAR2: myjobvar2
-      VAR3: myjobvar3
+      VAR2: job4myvar2 in an job local variable
+      VAR3: job4var3 local variables
     steps:
 
       - run: |
+          echo "VAR1 at the end" 
           echo $VAR1
           echo ${{env.VAR1}}
 
           echo ""
 
+          echo: "2 in the end"
           echo $VAR2
 
+          echo "var3 end"
           echo $VAR3
-        env: 
+        env:
+
+        echo "var3 updated but not printed"
           VAR3: mystepvar3
